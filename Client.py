@@ -24,5 +24,7 @@ except socket.gaierror:
 
 # connecting to the server
 s.connect((host_ip,port))
+s.send(b'Hello from Client')
+
 print("Socket successfully connected to {} on port:\t {}" .format(url, host_ip))
 print(s.recv(1024))

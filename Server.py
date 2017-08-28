@@ -30,8 +30,8 @@ def startListening():
 			print("Received Connection request from:\t{}".format(addr))
 		   	# send a thank you message to the client.
 			c.send(b'Thank you for connecting')
-			#d = c.recv(1024)
-			#print(d)
+			d = c.recv(1024)
+			print("Received data from Client:\t{}".format(d))
 
 			# Close the connection with the client
 			#c.close()
