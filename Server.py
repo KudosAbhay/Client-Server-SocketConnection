@@ -8,27 +8,27 @@ import socket
 port = 8000
 
 def startListening():
-	#Create a Socket Object
-	s = socket.socket()
-	print("\nCreating Socket..")
-	# Next bind to the port
-	# we have not typed any ip in the ip field
-	# instead we have inputted an empty string
-	# this makes the server listen to requests
-	# coming from other computers on the network
-	s.bind(('', port))
-	print("\nSocket binded to {}" .format(port))
-
-	# Put the socket into listening mode
-	s.listen(5)
-	print("Socket is listening")
-
-	# Forever loop until we interrupt it or until an error occurs
 	try:
+		#Create a Socket Object
+		s = socket.socket()
+		print("\nCreating Socket..")
+		# Next bind to the port
+		# we have not typed any ip in the ip field
+		# instead we have inputted an empty string
+		# this makes the server listen to requests
+		# coming from other computers on the network
+		s.bind(('', port))
+		print("\nSocket binded to {}" .format(port))
+
+		# Put the socket into listening mode
+		s.listen(5)
+		print("Socket is listening")
+
+		# Forever loop until we interrupt it or until an error occurs
 		while True:
 		   	# Establish connection with client.
 		   	c, addr = s.accept()
-		   	print("Got connection from:\t{}".format(addr))
+		   	print("Received Connection request from:\t{}".format(addr))
 
 		   	# send a thank you message to the client.
 		   	c.send(b'Thank you for connecting')
@@ -38,6 +38,8 @@ def startListening():
 	except KeyboardInterrupt:
 		print("\nStopping all connections.\nClosing Server Socket on port:\t{}".format(port))
 		c.close()
+	except socket.error:
+		print("Socket Connection Faced problems before listening to Clients")
 
 
 try:
