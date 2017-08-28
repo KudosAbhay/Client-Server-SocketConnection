@@ -23,18 +23,18 @@ def startListening():
 		# Put the socket into listening mode
 		s.listen(5)
 		print("Socket is listening")
-
 		# Forever loop until we interrupt it or until an error occurs
 		while True:
-		   	# Establish connection with client.
-		   	c, addr = s.accept()
-		   	print("Received Connection request from:\t{}".format(addr))
-
+			# Establish connection with client
+			c, addr = s.accept()
+			print("Received Connection request from:\t{}".format(addr))
 		   	# send a thank you message to the client.
-		   	c.send(b'Thank you for connecting')
+			c.send(b'Thank you for connecting')
+			#d = c.recv(1024)
+			#print(d)
 
-		   	# Close the connection with the client
-		   	#c.close()
+			# Close the connection with the client
+			#c.close()
 	except KeyboardInterrupt:
 		print("\nStopping all connections.\nClosing Server Socket on port:\t{}".format(port))
 		c.close()
