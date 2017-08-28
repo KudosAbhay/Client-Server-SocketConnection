@@ -1,8 +1,12 @@
+#This is a Connection to a WebSite using Python with two different types:
+# 1. With Caching Enabled
+# 2. With Caching Disabled
+#This is Compatible with Python3 / 3.5
+
 import httplib2
 print("Importing httplib2")
 
 import time
-print("Time Library is Successfully imported")
 
 def parsingResponse(resp,content):
 	print("Response Status:\t{}".format(resp.status))
