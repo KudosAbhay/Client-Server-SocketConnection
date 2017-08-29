@@ -38,14 +38,22 @@ def startListening():
 			data = connection.recv(1024)
 			#Decode the Received data from utf-8 format
 			data = data.decode('utf-8')
-			print("Received data from Client:\t{}".format(data))
-			connection.send(reply)
+			a = len(data)
+			print("Length of Data:\t{}".format(a))
+			#Check if Data received is in Valid JSON format
+			if(data[0:1] != '{'):
+				print("Valid Data not found\nClosing this Connection")
+				connection.close()
+				continue
+			else:
+				print("Received data from Client:\t{}".format(data))
+				connection.send(reply)
 
 			# Close the connection with the client
-			#c.close()
+			#connection.close()
 	except KeyboardInterrupt:
 		print("\nStopping all connections.\nClosing Server Socket on port:\t{}".format(port))
-		c.close()
+		connection.close()
 	except socket.error:
 		print("Socket Connection Faced problems before listening to Clients\n")
 		print("Please Check if some other process is running on the same port")
