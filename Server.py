@@ -2,10 +2,16 @@
 
 # first of all import the socket library
 import socket
+import json
+reply = {}
+
+#This is the reply which shall be sent to the user on successful connection
+reply['CONNECTED'] = 'Thank you for Connecting'
+reply = json.dumps(reply, ensure_ascii=False).encode('utf-8')
 
 # reserve a port on your computer in our
 # case it is 12345 but it can be anything
-port = 8000
+port = 3000
 
 def startListening():
 	try:
@@ -26,12 +32,14 @@ def startListening():
 		# Forever loop until we interrupt it or until an error occurs
 		while True:
 			# Establish connection with client
-			c, addr = s.accept()
+			connection, addr = s.accept()
 			print("Received Connection request from:\t{}".format(addr))
 		   	# send a thank you message to the client.
-			c.send(b'Thank you for connecting')
-			d = c.recv(1024)
-			print("Received data from Client:\t{}".format(d))
+			data = connection.recv(1024)
+			#Decode the Received data from utf-8 format
+			data = data.decode('utf-8')
+			print("Received data from Client:\t{}".format(data))
+			connection.send(reply)
 
 			# Close the connection with the client
 			#c.close()
@@ -39,7 +47,8 @@ def startListening():
 		print("\nStopping all connections.\nClosing Server Socket on port:\t{}".format(port))
 		c.close()
 	except socket.error:
-		print("Socket Connection Faced problems before listening to Clients")
+		print("Socket Connection Faced problems before listening to Clients\n")
+		print("Please Check if some other process is running on the same port")
 
 
 try:
