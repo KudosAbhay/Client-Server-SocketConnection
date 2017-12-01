@@ -38,7 +38,7 @@ json_data = json_data.encode('utf-8')
 
 #Send JSON Data encoded in utf-8 to Server
 s.send(json_data)
-print("Socket successfully connected to {} on port:\t {}" .format(url, host_ip))
+print("Socket successfully connected to {} on port:\t {}" .format(url, port))
 
 #Store the received byte
 received = s.recv(1024)
